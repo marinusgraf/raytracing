@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 4.0)
+file(GLOB SOURCES "src/*.cpp")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+project(raytracing_one_weekend)
+add_executable(main ${SOURCES}) 
+target_compile_options(main PRIVATE -Wall -Werror -g)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
