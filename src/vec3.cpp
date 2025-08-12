@@ -12,43 +12,56 @@ double vec3::operator[](int i) const { return e[i]; }
 double& vec3::operator[](int i) { return e[i]; }
 
 vec3& vec3::operator+=(const vec3& v) {
-  e[0] += v.e[0];
-  e[1] += v.e[1];
-  e[2] += v.e[2];
-  return *this;
+    e[0] += v.e[0];
+    e[1] += v.e[1];
+    e[2] += v.e[2];
+    return *this;
 }
 
 vec3& vec3::operator-=(const vec3& v) {
-  vec3 rhs = v;
-  rhs = -rhs;
-  return *this += rhs;
+    vec3 rhs = v;
+    rhs = -rhs;
+    return *this += rhs;
 }
 
 vec3& vec3::operator*=(const vec3& v) {
-  e[0] *= v[0];
-  e[1] *= v[1];
-  e[2] *= v[2];
-  return *this;
+    e[0] *= v[0];
+    e[1] *= v[1];
+    e[2] *= v[2];
+    return *this;
 }
 
 vec3& vec3::operator*=(double scalar) {
-  e[0] *= scalar;
-  e[1] *= scalar;
-  e[2] *= scalar;
-  return *this;
+    e[0] *= scalar;
+    e[1] *= scalar;
+    e[2] *= scalar;
+    return *this;
 }
 
 vec3& vec3::operator/=(double scalar) {
-  *this *= 1 / scalar;
-  return *this;
+    *this *= 1 / scalar;
+    return *this;
 }
 
 double vec3::length() const { return std::sqrt(length_squared()); }
 
-double vec3::length_squared() const { return e[0] * e[0] + e[1] * e[1] + e[2] * e[2]; }
+double vec3::length_squared() const {
+    return e[0] * e[0] + e[1] * e[1] + e[2] * e[2];
+}
 
-vec3 vec3::random() { return vec3(random_double(), random_double(), random_double()); }
+vec3 vec3::random() {
+    return vec3(random_double(), random_double(), random_double());
+}
 
-vec3 vec3::random(double min, double max) { return vec3(random_double(min, max), random_double(min, max), random_double(min, max)); }
+vec3 vec3::random(double min, double max) {
+    return vec3(random_double(min, max),
+                random_double(min, max),
+                random_double(min, max));
+}
 
+bool vec3::near_zero() const {
+    double s = 1e-8;
+    return (std::fabs(e[0]) < s) && (std::fabs(e[1]) < s) &&
+           (std::fabs(e[2]) < s);
+}
 using point3 = vec3;
